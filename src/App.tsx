@@ -1,24 +1,26 @@
-import React from 'react';
-import logo from './logo.svg';
+import * as React from 'react';
+import './web-components/basic-component';
 import './App.css';
 
+declare global {
+  namespace JSX {
+    interface CustomComponent extends React.DetailedHTMLProps<
+    React.HTMLAttributes<HTMLElement>,
+    HTMLElement
+    > {
+      name?: string;
+    }
+    interface IntrinsicElements {
+      'basic-component': CustomComponent
+    }
+  }
+}
+
 function App() {
+  const nombre = 'Manolo Perez Agobio';
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <basic-component name={nombre}></basic-component>
     </div>
   );
 }
